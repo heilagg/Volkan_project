@@ -64,7 +64,7 @@
     position: fixed;
     top: 16px;
     right: 16px;
-    z-index: 9999;
+    z-index: 9000;
     background: var(--gold);
     color: var(--black);
     font-size: 11px;
@@ -139,6 +139,40 @@
     text-transform: uppercase;
     flex-shrink: 0;
   }
+
+  .nav-burger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    z-index: 9999;
+    position: relative;
+  }
+  .nav-burger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--white);
+    border-radius: 2px;
+    transition: var(--transition);
+  }
+
+  .mob-link {
+    font-size: 28px;
+    font-weight: 300;
+    letter-spacing: -0.01em;
+    color: var(--white);
+    text-decoration: none;
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    width: 260px;
+    text-align: center;
+    transition: color 0.2s;
+  }
+  .mob-link:hover { color: var(--gold); }
 
   .nav-links {
     display: flex;
@@ -1145,6 +1179,7 @@
   /* ═══════════════════════════════════════════
      RESPONSIVE — basic tablet
      ═══════════════════════════════════════════ */
+  /* ── TABLET: 1100px ───────────────────────── */
   @media (max-width: 1100px) {
     nav { padding: 0 32px; }
     .section-pad { padding: 80px 32px; }
@@ -1159,6 +1194,124 @@
     .footer-inner { grid-template-columns: 1fr 1fr; gap: 40px; }
     .esg-grid { grid-template-columns: repeat(2,1fr); }
     .hero-content { padding: 0 32px; }
+    .innovation-content { padding: 60px 40px; }
+    .platform-visual { height: 440px; }
+    .product-showcase { height: 420px; }
+  }
+
+  /* ── MOBILE: 768px ────────────────────────── */
+  @media (max-width: 768px) {
+    /* Бейдж — убрать с дороги бургера */
+    .mockup-badge { top: auto; bottom: 16px; right: 16px; font-size: 10px; padding: 5px 10px; }
+
+    /* Navigation — скрыть ссылки, показать бургер */
+    nav { padding: 0 20px; height: 60px; }
+    .nav-links { display: none; }
+    .nav-lang { display: none; }
+    .nav-burger {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 8px;
+    }
+    .nav-burger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--white);
+      border-radius: 2px;
+    }
+
+    /* Hero */
+    .hero { min-height: 100svh; align-items: flex-end; padding-bottom: 80px; }
+    .hero-content { padding: 0 20px; max-width: 100%; }
+    .hero h1 { font-size: clamp(38px, 11vw, 56px); }
+    .hero-sub { font-size: 16px; margin-bottom: 32px; }
+    .hero-actions { flex-direction: column; align-items: flex-start; gap: 12px; }
+    .btn-primary, .btn-outline { width: 100%; text-align: center; }
+
+    /* Section padding */
+    .section-pad { padding: 60px 20px; }
+    .section-pad-sm { padding: 48px 20px 32px; }
+    .section-title { font-size: clamp(26px, 7vw, 38px); }
+
+    /* Stats bar */
+    .stats-bar-inner { grid-template-columns: repeat(2, 1fr); gap: 0; }
+    .stat-item { padding: 28px 16px; }
+    .stat-val { font-size: 28px; }
+    .stat-label { font-size: 11px; }
+
+    /* What we do */
+    .what-we-do-inner { gap: 40px; }
+
+    /* Platform */
+    .platform-visual { height: 260px; }
+    .platform-steps { grid-template-columns: 1fr 1fr; }
+    .platform-step { padding: 28px 20px; border-right: none; border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .platform-step:nth-child(odd) { border-right: 1px solid rgba(255,255,255,0.06); }
+    .platform-step:last-child { border-bottom: none; }
+    .platform-step h4 { font-size: 15px; }
+    .platform-step p { font-size: 13px; }
+
+    /* Pyrolysis */
+    .pyrolysis-content { padding: 0 20px; }
+    .pyrolysis-content h2 { font-size: clamp(24px, 7vw, 36px); }
+    .specs-mini { grid-template-columns: 1fr 1fr; gap: 12px; }
+
+    /* Products */
+    .products-grid { grid-template-columns: 1fr 1fr; gap: 2px; }
+    .product-card { aspect-ratio: 0.9; }
+    .product-card h3 { font-size: 18px; }
+    .product-card p { font-size: 13px; }
+    .product-card-content { padding: 24px 18px; }
+    .products-header { flex-direction: column; gap: 24px; align-items: flex-start; }
+    .product-showcase { height: 260px; }
+    .product-showcase-caption { flex-direction: column; gap: 20px; padding: 24px 20px; }
+
+    /* Innovation */
+    .innovation-image-wrap { min-height: 280px !important; }
+    .innovation-content { padding: 48px 20px; }
+    .innovation-stats { grid-template-columns: 1fr 1fr; gap: 20px; }
+    .inno-stat-num { font-size: 22px; }
+    .pilot-hall { height: 320px; }
+    .pilot-hall-caption { padding: 24px 20px; flex-direction: column; align-items: flex-start; gap: 16px; }
+    .pilot-hall-caption h3 { font-size: 20px; }
+
+    /* Sustainability */
+    .sustainability { padding: 72px 20px; }
+    .esg-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+    .esg-val { font-size: 18px; }
+
+    /* Carbon Credits */
+    .carbon-credits-content { padding: 60px 20px; }
+    .carbon-credits-content h2 { font-size: clamp(24px, 7vw, 36px); }
+
+    /* Contact CTA */
+    .contact-cta { padding: 60px 20px; }
+
+    /* Investors */
+    .investors-section .section-pad { padding: 60px 20px; }
+
+    /* Footer */
+    .footer-inner { grid-template-columns: 1fr; gap: 32px; }
+    .footer { padding: 60px 20px 32px; }
+  }
+
+  /* ── SMALL MOBILE: 480px ─────────────────── */
+  @media (max-width: 480px) {
+    .hero h1 { font-size: clamp(32px, 10vw, 44px); }
+    .products-grid { grid-template-columns: 1fr; }
+    .product-card { aspect-ratio: 1.1; }
+    .stats-bar-inner { grid-template-columns: 1fr 1fr; }
+    .platform-steps { grid-template-columns: 1fr; }
+    .platform-step { border-right: none; }
+    .platform-step:nth-child(odd) { border-right: none; }
+    .esg-grid { grid-template-columns: 1fr 1fr; }
+    .innovation-stats { grid-template-columns: 1fr 1fr; }
+    .specs-mini { grid-template-columns: 1fr; }
+    .footer-inner { grid-template-columns: 1fr; }
+    .section-title { font-size: clamp(24px, 8vw, 32px); }
   }
 </style>
 </head>
@@ -1182,14 +1335,44 @@
     <li><a href="#sustainability">Sustainability</a></li>
     <li><a href="#investors">Investors</a></li>
     <li>
-      <div class="lang-toggle">
+      <div class="lang-toggle nav-lang">
         <span class="active">EN</span>
         <span>TR</span>
       </div>
     </li>
     <li><a href="#contact" class="nav-cta">Contact Us</a></li>
   </ul>
+
+  <!-- Mobile burger button -->
+  <button class="nav-burger" id="navBurger" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<!-- Mobile menu overlay -->
+<div id="mobileMenu" style="
+  display:none; position:fixed; inset:0; z-index:8000;
+  background: rgba(10,10,13,0.97); backdrop-filter: blur(12px);
+  flex-direction:column; align-items:center; justify-content:center; gap:0;
+">
+  <button onclick="document.getElementById('mobileMenu').style.display='none'" style="
+    position:absolute; top:20px; right:20px; background:none; border:none;
+    color:var(--white); font-size:28px; cursor:pointer; padding:8px;
+  ">✕</button>
+  <a href="#platform" class="mob-link" onclick="document.getElementById('mobileMenu').style.display='none'">Platform</a>
+  <a href="#products" class="mob-link" onclick="document.getElementById('mobileMenu').style.display='none'">Products</a>
+  <a href="#innovation" class="mob-link" onclick="document.getElementById('mobileMenu').style.display='none'">Innovation Center</a>
+  <a href="#sustainability" class="mob-link" onclick="document.getElementById('mobileMenu').style.display='none'">Sustainability</a>
+  <a href="#investors" class="mob-link" onclick="document.getElementById('mobileMenu').style.display='none'">Investors</a>
+  <a href="#contact" class="mob-link" onclick="document.getElementById('mobileMenu').style.display='none'" style="color:var(--gold);">Contact Us →</a>
+</div>
+
+<script>
+  document.getElementById('navBurger').addEventListener('click', function() {
+    var m = document.getElementById('mobileMenu');
+    m.style.display = m.style.display === 'none' ? 'flex' : 'none';
+  });
+</script>
 
 <!-- ═══════════════════════════════════════════
      HERO
