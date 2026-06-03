@@ -1,0 +1,1874 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>carbongraf.com — Design Mockup v1.0</title>
+<style>
+  /* ═══════════════════════════════════════════
+     DESIGN SYSTEM — CarbonGraf
+     ═══════════════════════════════════════════ */
+  :root {
+    --black:        #0A0A0D;
+    --graphite-deep:#131318;
+    --graphite:     #1C1C24;
+    --graphite-mid: #26262F;
+    --graphite-lite: #32323E;
+    --gold:         #C8A96E;
+    --gold-lite:    #E2C894;
+    --gold-dim:     rgba(200,169,110,0.18);
+    --white:        #F2F2F5;
+    --mist:         #A0A0B0;
+    --green:        #4CAF7D;
+    --blue:         #3B7DDD;
+    --text-sm: 13px;
+    --text-base: 16px;
+    --text-lg: 18px;
+    --radius: 4px;
+    --transition: 0.35s cubic-bezier(0.4,0,0.2,1);
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: var(--text-base);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── UNVERIFIED DATA — красная пометка ───────── */
+  .unverified {
+    color: #ff4d4d;
+    border-bottom: 1.5px dashed #ff4d4d;
+    cursor: help;
+    font-style: normal;
+  }
+  .unverified-block {
+    border: 1.5px dashed #ff4d4d;
+    background: rgba(255,77,77,0.06);
+    border-radius: 3px;
+    padding: 2px 7px;
+    color: #ff4d4d;
+  }
+  .removed-block {
+    display: none; /* полностью убрано — данные придуманы */
+  }
+
+  /* ── MOCKUP ANNOTATION BADGE ─────────────────── */
+  .mockup-badge {
+    position: fixed;
+    top: 16px;
+    right: 16px;
+    z-index: 9999;
+    background: var(--gold);
+    color: var(--black);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 20px;
+    box-shadow: 0 4px 20px rgba(200,169,110,0.4);
+  }
+
+  /* ── PLACEHOLDER STYLE ───────────────────────── */
+  .placeholder {
+    border: 2px dashed rgba(200,169,110,0.5);
+    background: rgba(200,169,110,0.04);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    color: var(--gold);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border-radius: var(--radius);
+    padding: 20px;
+  }
+  .placeholder svg { opacity: 0.5; }
+
+  /* ═══════════════════════════════════════════
+     NAVIGATION
+     ═══════════════════════════════════════════ */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    padding: 0 60px;
+    height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(to bottom, rgba(10,10,13,0.95) 0%, rgba(10,10,13,0) 100%);
+    backdrop-filter: blur(0px);
+    transition: var(--transition);
+  }
+  nav.scrolled {
+    background: rgba(10,10,13,0.97);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(200,169,110,0.12);
+  }
+
+  .nav-logo {
+    width: 160px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .nav-logo .logo-placeholder {
+    width: 160px;
+    height: 40px;
+    border: 1.5px dashed rgba(200,169,110,0.5);
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: rgba(200,169,110,0.7);
+    text-transform: uppercase;
+    flex-shrink: 0;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 36px;
+    list-style: none;
+  }
+  .nav-links a {
+    color: rgba(242,242,245,0.8);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    transition: color var(--transition);
+  }
+  .nav-links a:hover { color: var(--gold); }
+
+  .nav-cta {
+    background: var(--gold);
+    color: var(--black) !important;
+    padding: 10px 22px;
+    border-radius: var(--radius);
+    font-weight: 700 !important;
+    letter-spacing: 0.04em;
+    font-size: 13px !important;
+    transition: background var(--transition) !important;
+  }
+  .nav-cta:hover { background: var(--gold-lite) !important; color: var(--black) !important; }
+
+  .lang-toggle {
+    display: flex;
+    gap: 4px;
+    margin-left: 8px;
+  }
+  .lang-toggle span {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--mist);
+    cursor: pointer;
+    padding: 2px 6px;
+    border-radius: 3px;
+    letter-spacing: 0.05em;
+  }
+  .lang-toggle span.active {
+    color: var(--gold);
+    background: var(--gold-dim);
+  }
+
+  /* ═══════════════════════════════════════════
+     HERO
+     ═══════════════════════════════════════════ */
+  .hero {
+    position: relative;
+    height: 100vh;
+    min-height: 700px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background-image: url('CA ENERGY MAIN FOLDER/ca-1.png');
+    background-size: cover;
+    background-position: center 30%;
+    transform: scale(1.05);
+    transition: transform 0.1s linear;
+  }
+
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      105deg,
+      rgba(10,10,13,0.85) 0%,
+      rgba(10,10,13,0.55) 40%,
+      rgba(10,10,13,0.28) 100%
+    );
+  }
+
+  .hero-overlay-bottom {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 200px;
+    background: linear-gradient(to top, var(--black) 0%, transparent 100%);
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 0 60px;
+    max-width: 720px;
+  }
+
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 24px;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 32px;
+    height: 1.5px;
+    background: var(--gold);
+  }
+
+  .hero h1 {
+    font-size: clamp(56px, 8vw, 100px);
+    font-weight: 300;
+    line-height: 1.08;
+    letter-spacing: -0.03em;
+    margin-bottom: 32px;
+    color: var(--white);
+  }
+  .hero h1 strong {
+    font-weight: 700;
+    color: var(--gold);
+  }
+
+  .hero-sub {
+    font-size: 20px;
+    line-height: 1.65;
+    color: rgba(242,242,245,0.75);
+    margin-bottom: 48px;
+    max-width: 600px;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    background: var(--gold);
+    color: var(--black);
+    padding: 14px 32px;
+    border-radius: var(--radius);
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    transition: var(--transition);
+    display: inline-block;
+  }
+  .btn-primary:hover { background: var(--gold-lite); transform: translateY(-1px); }
+
+  .btn-outline {
+    border: 1.5px solid rgba(200,169,110,0.5);
+    color: var(--gold);
+    padding: 13px 30px;
+    border-radius: var(--radius);
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    transition: var(--transition);
+    display: inline-block;
+  }
+  .btn-outline:hover {
+    border-color: var(--gold);
+    background: var(--gold-dim);
+  }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 40px;
+    left: 60px;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: rgba(242,242,245,0.5);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+  .hero-scroll-line {
+    width: 1px;
+    height: 48px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+    animation: scrollpulse 2s ease-in-out infinite;
+  }
+  @keyframes scrollpulse {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 1; }
+  }
+
+  /* ═══════════════════════════════════════════
+     STATS BAR
+     ═══════════════════════════════════════════ */
+  .stats-bar {
+    background: var(--graphite-deep);
+    border-top: 1px solid rgba(200,169,110,0.15);
+    border-bottom: 1px solid rgba(200,169,110,0.15);
+    padding: 0 60px;
+  }
+  .stats-bar-inner {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    divide: horizontal;
+  }
+  .stat-item {
+    padding: 32px 24px;
+    border-right: 1px solid rgba(255,255,255,0.06);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .stat-item:first-child { padding-left: 0; }
+  .stat-item:last-child { border-right: none; }
+  .stat-number {
+    font-size: 38px;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.02em;
+  }
+  .stat-unit {
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--mist);
+  }
+  .stat-label {
+    font-size: 12px;
+    color: var(--mist);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-top: 2px;
+  }
+
+  /* ═══════════════════════════════════════════
+     SECTIONS — COMMON
+     ═══════════════════════════════════════════ */
+  section { position: relative; }
+
+  .section-pad { padding: 120px 60px; }
+  .section-pad-sm { padding: 80px 60px; }
+
+  .section-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+  }
+  .section-eyebrow::before {
+    content: '';
+    display: block;
+    width: 24px;
+    height: 1.5px;
+    background: var(--gold);
+  }
+
+  h2.section-title {
+    font-size: clamp(32px, 4vw, 52px);
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    margin-bottom: 20px;
+  }
+  h2.section-title strong { font-weight: 700; }
+
+  .section-desc {
+    font-size: 17px;
+    color: var(--mist);
+    line-height: 1.7;
+    max-width: 560px;
+  }
+
+  /* ═══════════════════════════════════════════
+     CIRCULAR ECONOMY — WHAT WE DO
+     ═══════════════════════════════════════════ */
+  .what-we-do {
+    background: var(--graphite-deep);
+    overflow: hidden;
+  }
+
+  .what-we-do-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .circle-diagram {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1;
+    max-width: 460px;
+    margin: 0 auto;
+  }
+
+  /* SVG circular diagram inline */
+  .circle-diagram svg { width: 100%; height: 100%; }
+
+  .pillars {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    margin-top: 40px;
+  }
+  .pillar {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+  }
+  .pillar-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--gold-dim);
+    border: 1px solid rgba(200,169,110,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 18px;
+  }
+  .pillar-text h4 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 4px;
+    color: var(--white);
+  }
+  .pillar-text p {
+    font-size: 14px;
+    color: var(--mist);
+    line-height: 1.5;
+  }
+
+  /* ═══════════════════════════════════════════
+     PRODUCTS SECTION
+     ═══════════════════════════════════════════ */
+  .products-section {
+    background: var(--black);
+  }
+
+  .products-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 60px;
+  }
+
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 3px;
+  }
+
+  .product-card {
+    background: var(--graphite);
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: var(--transition);
+    aspect-ratio: 0.78;
+  }
+  .product-card:hover .product-card-img { transform: scale(1.05); }
+
+  .product-card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: transform 0.7s cubic-bezier(0.4,0,0.2,1);
+    filter: brightness(0.72) saturate(0.85);
+  }
+
+  .product-card-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top,
+      rgba(10,10,13,0.95) 0%,
+      rgba(10,10,13,0.55) 45%,
+      rgba(10,10,13,0.15) 100%);
+  }
+
+  .product-card-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 36px 30px;
+  }
+
+  .product-tag {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 8px;
+    display: block;
+  }
+  .product-card h3 {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    line-height: 1.2;
+    color: var(--white);
+  }
+  .product-card p {
+    font-size: 14px;
+    color: rgba(242,242,245,0.75);
+    line-height: 1.55;
+  }
+
+  .product-card-arrow {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    width: 36px;
+    height: 36px;
+    border: 1px solid rgba(200,169,110,0.4);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: var(--transition);
+    background: rgba(10,10,13,0.4);
+    backdrop-filter: blur(4px);
+  }
+  .product-card:hover .product-card-arrow { opacity: 1; }
+
+  /* Full-width product showcase image */
+  .product-showcase {
+    width: 100%;
+    height: 600px;
+    object-fit: cover;
+    display: block;
+    filter: brightness(0.75) saturate(0.88);
+  }
+
+  .product-showcase-caption {
+    background: var(--graphite-deep);
+    padding: 32px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid rgba(200,169,110,0.15);
+  }
+
+  /* ═══════════════════════════════════════════
+     PLATFORM SECTION
+     ═══════════════════════════════════════════ */
+  .platform-section {
+    background: var(--graphite-deep);
+  }
+
+  .platform-visual {
+    width: 100%;
+    height: 620px;
+    object-fit: cover;
+    object-position: center center;
+    display: block;
+    border-top: 1px solid rgba(200,169,110,0.1);
+    border-bottom: 1px solid rgba(200,169,110,0.1);
+    filter: brightness(1.15) contrast(1.04) saturate(0.9);
+  }
+
+  .platform-steps {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    margin-top: 0;
+  }
+
+  .platform-step {
+    padding: 44px 32px;
+    border-right: 1px solid rgba(255,255,255,0.06);
+    background: var(--graphite-deep);
+    transition: var(--transition);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+  .platform-step::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--gold);
+    transform: scaleX(0);
+    transition: transform var(--transition);
+    transform-origin: left;
+  }
+  .platform-step:hover::before { transform: scaleX(1); }
+  .platform-step:hover { background: var(--graphite-mid); }
+  .platform-step:last-child { border-right: none; }
+
+  .step-num {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: var(--gold);
+    margin-bottom: 12px;
+    display: block;
+  }
+  .platform-step h4 {
+    font-size: 17px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    line-height: 1.3;
+  }
+  .platform-step p {
+    font-size: 14px;
+    color: var(--mist);
+    line-height: 1.6;
+  }
+
+  /* ═══════════════════════════════════════════
+     PYROLYSIS HIGHLIGHT
+     ═══════════════════════════════════════════ */
+  .pyrolysis-section {
+    position: relative;
+    height: 580px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+  }
+  .pyrolysis-bg {
+    position: absolute;
+    inset: 0;
+    background-image: url('3-CAPR/0.png');
+    background-size: cover;
+    background-position: center;
+  }
+  .pyrolysis-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgba(10,10,13,0.92) 0%, rgba(10,10,13,0.6) 50%, rgba(10,10,13,0.1) 100%);
+  }
+  .pyrolysis-content {
+    position: relative;
+    z-index: 2;
+    padding: 0 60px;
+    max-width: 580px;
+  }
+  .pyrolysis-content h2 {
+    font-size: clamp(28px, 3.5vw, 44px);
+    font-weight: 300;
+    line-height: 1.15;
+    margin-bottom: 20px;
+    letter-spacing: -0.02em;
+  }
+  .pyrolysis-content h2 strong { font-weight: 700; }
+  .pyrolysis-content p {
+    font-size: 16px;
+    color: rgba(242,242,245,0.75);
+    line-height: 1.7;
+    margin-bottom: 32px;
+  }
+  .specs-mini {
+    display: flex;
+    gap: 32px;
+    margin-top: 8px;
+  }
+  .spec-mini-item { display: flex; flex-direction: column; gap: 4px; }
+  .spec-mini-val { font-size: 22px; font-weight: 700; color: var(--gold); }
+  .spec-mini-label { font-size: 11px; color: var(--mist); letter-spacing: 0.08em; text-transform: uppercase; }
+
+  /* ═══════════════════════════════════════════
+     INNOVATION CENTER
+     ═══════════════════════════════════════════ */
+  .innovation-section {
+    background: var(--black);
+    overflow: hidden;
+  }
+
+  .innovation-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 640px;
+  }
+
+  .innovation-image-wrap {
+    position: relative;
+    overflow: hidden;
+  }
+  .innovation-image-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s cubic-bezier(0.4,0,0.2,1);
+    filter: brightness(0.75) saturate(0.9);
+  }
+  .innovation-image-wrap:hover img { transform: scale(1.03); filter: brightness(0.82) saturate(0.95); }
+
+  .innovation-content {
+    background: var(--graphite-deep);
+    padding: 80px 64px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .innovation-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 40px;
+    padding-top: 40px;
+    border-top: 1px solid rgba(200,169,110,0.15);
+  }
+  .inno-stat { display: flex; flex-direction: column; gap: 4px; }
+  .inno-stat-num { font-size: 28px; font-weight: 700; color: var(--gold); }
+  .inno-stat-label { font-size: 12px; color: var(--mist); letter-spacing: 0.05em; }
+
+  /* Pilot Hall full width */
+  .pilot-hall {
+    position: relative;
+    height: 500px;
+    overflow: hidden;
+  }
+  .pilot-hall img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    filter: brightness(0.78) saturate(0.9);
+  }
+  .pilot-hall-caption {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 60px;
+    background: linear-gradient(to top, rgba(10,10,13,0.9) 0%, transparent 100%);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+  .pilot-hall-caption h3 {
+    font-size: clamp(22px, 2.5vw, 32px);
+    font-weight: 300;
+    letter-spacing: -0.01em;
+  }
+  .pilot-hall-caption h3 strong { font-weight: 700; }
+
+  /* ═══════════════════════════════════════════
+     SUSTAINABILITY STRIP
+     ═══════════════════════════════════════════ */
+  .sustainability {
+    background: var(--black);
+    padding: 100px 60px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .sustainability::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center, rgba(76,175,125,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .sustainability h2 {
+    font-size: clamp(32px, 4vw, 56px);
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    margin-bottom: 16px;
+  }
+  .sustainability h2 .green { color: var(--green); font-weight: 700; }
+  .sustainability h2 .gold { color: var(--gold); font-weight: 700; }
+  .sustainability-sub {
+    font-size: 17px;
+    color: var(--mist);
+    max-width: 560px;
+    margin: 0 auto 60px;
+    line-height: 1.65;
+  }
+  .esg-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    max-width: 900px;
+    margin: 0 auto 48px;
+  }
+  .esg-card {
+    background: var(--graphite-deep);
+    border: 1px solid rgba(76,175,125,0.2);
+    border-radius: var(--radius);
+    padding: 28px 20px;
+    text-align: center;
+  }
+  .esg-icon { font-size: 28px; margin-bottom: 12px; }
+  .esg-val { font-size: 22px; font-weight: 700; color: var(--green); margin-bottom: 6px; }
+  .esg-label { font-size: 12px; color: var(--mist); letter-spacing: 0.05em; }
+
+  /* ═══════════════════════════════════════════
+     CARBON CREDITS
+     ═══════════════════════════════════════════ */
+  .carbon-credits {
+    position: relative;
+    overflow: hidden;
+    min-height: 460px;
+    display: flex;
+    align-items: center;
+  }
+  .carbon-credits-bg {
+    position: absolute;
+    inset: 0;
+    background-image: url('10-CACC/1.png');
+    background-size: cover;
+    background-position: center;
+    filter: brightness(0.5) saturate(0.7);
+  }
+  .carbon-credits-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgba(10,10,13,0.95) 30%, rgba(10,10,13,0.6) 70%, transparent 100%);
+  }
+  .carbon-credits-content {
+    position: relative;
+    z-index: 2;
+    padding: 80px 60px;
+    max-width: 620px;
+  }
+  .carbon-credits-content h2 {
+    font-size: clamp(28px, 3.5vw, 44px);
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    margin-bottom: 16px;
+  }
+  .carbon-credits-content h2 strong { color: var(--green); font-weight: 700; }
+  .carbon-credits-content p {
+    font-size: 16px;
+    color: rgba(242,242,245,0.72);
+    line-height: 1.7;
+    margin-bottom: 32px;
+  }
+  .credit-badges {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 32px;
+  }
+  .credit-badge {
+    border: 1px solid rgba(76,175,125,0.4);
+    background: rgba(76,175,125,0.08);
+    color: var(--green);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    padding: 6px 14px;
+    border-radius: 20px;
+    text-transform: uppercase;
+  }
+
+  /* ═══════════════════════════════════════════
+     INVESTORS
+     ═══════════════════════════════════════════ */
+  .investors-section {
+    background: var(--black);
+    padding: 120px 60px;
+  }
+  .investors-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    margin-top: 60px;
+  }
+  .revenue-streams {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .revenue-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 18px 20px;
+    background: var(--graphite-deep);
+    border-radius: var(--radius);
+    border-left: 3px solid var(--gold);
+    transition: var(--transition);
+  }
+  .revenue-item:hover { background: var(--graphite-mid); }
+  .revenue-bar {
+    height: 4px;
+    background: linear-gradient(to right, var(--gold), transparent);
+    border-radius: 2px;
+    margin-top: 4px;
+    flex-shrink: 0;
+  }
+  .revenue-label { font-size: 14px; font-weight: 500; flex: 1; }
+  .revenue-pct {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--gold);
+    flex-shrink: 0;
+  }
+
+  .investor-cta-box {
+    background: var(--graphite-deep);
+    border: 1px solid rgba(200,169,110,0.2);
+    border-radius: var(--radius);
+    padding: 48px 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  .investor-cta-box h3 {
+    font-size: 26px;
+    font-weight: 300;
+    letter-spacing: -0.01em;
+  }
+  .investor-cta-box h3 strong { font-weight: 700; }
+  .investor-cta-box p {
+    font-size: 15px;
+    color: var(--mist);
+    line-height: 1.65;
+  }
+  .form-row {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .form-field {
+    background: var(--graphite);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: var(--radius);
+    padding: 12px 16px;
+    color: var(--white);
+    font-size: 14px;
+    font-family: inherit;
+    outline: none;
+    transition: border-color var(--transition);
+  }
+  .form-field:focus { border-color: rgba(200,169,110,0.5); }
+  .form-field::placeholder { color: var(--mist); }
+
+  /* ═══════════════════════════════════════════
+     CONTACT / CTA FULL SECTION
+     ═══════════════════════════════════════════ */
+  .contact-cta {
+    background: var(--graphite-deep);
+    padding: 100px 60px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    border-top: 1px solid rgba(200,169,110,0.12);
+  }
+  .contact-cta h2 {
+    font-size: clamp(28px, 3.5vw, 44px);
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    margin-bottom: 16px;
+  }
+  .contact-cta h2 strong { font-weight: 700; color: var(--gold); }
+  .contact-cta p { font-size: 16px; color: var(--mist); line-height: 1.65; margin-bottom: 32px; }
+  .contact-channels { display: flex; flex-direction: column; gap: 16px; }
+  .channel {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 15px;
+    color: rgba(242,242,245,0.8);
+  }
+  .channel-icon {
+    width: 36px;
+    height: 36px;
+    background: var(--gold-dim);
+    border: 1px solid rgba(200,169,110,0.25);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 15px;
+  }
+
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  textarea.form-field { resize: none; min-height: 120px; }
+
+  /* ═══════════════════════════════════════════
+     FOOTER
+     ═══════════════════════════════════════════ */
+  footer {
+    background: var(--black);
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding: 60px;
+  }
+  .footer-inner {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    gap: 60px;
+    margin-bottom: 48px;
+  }
+  .footer-brand .logo-placeholder {
+    width: 140px;
+    height: 38px;
+    border: 1.5px dashed rgba(200,169,110,0.4);
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: rgba(200,169,110,0.6);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  .footer-brand p {
+    font-size: 13px;
+    color: var(--mist);
+    line-height: 1.6;
+    max-width: 260px;
+  }
+  .footer-col h5 {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+  }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .footer-col ul a {
+    color: var(--mist);
+    text-decoration: none;
+    font-size: 14px;
+    transition: color var(--transition);
+  }
+  .footer-col ul a:hover { color: var(--white); }
+
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 28px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    font-size: 12px;
+    color: rgba(160,160,176,0.6);
+  }
+  .footer-bottom a { color: rgba(200,169,110,0.6); text-decoration: none; }
+
+  /* ═══════════════════════════════════════════
+     SCROLLED NAV STATE
+     ═══════════════════════════════════════════ */
+  .gold-line-top {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+    opacity: 0.4;
+  }
+
+  /* ═══════════════════════════════════════════
+     SECTION DIVIDER
+     ═══════════════════════════════════════════ */
+  .divider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(200,169,110,0.3), transparent);
+  }
+
+  /* ═══════════════════════════════════════════
+     MOCKUP SECTION LABELS (design review only)
+     ═══════════════════════════════════════════ */
+  .section-label {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: rgba(200,169,110,0.12);
+    border: 1px solid rgba(200,169,110,0.25);
+    color: var(--gold);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 3px;
+    pointer-events: none;
+    z-index: 10;
+  }
+
+  /* ═══════════════════════════════════════════
+     RESPONSIVE — basic tablet
+     ═══════════════════════════════════════════ */
+  @media (max-width: 1100px) {
+    nav { padding: 0 32px; }
+    .section-pad { padding: 80px 32px; }
+    .stats-bar { padding: 0 32px; }
+    .stats-bar-inner { grid-template-columns: repeat(3, 1fr); }
+    .what-we-do-inner { grid-template-columns: 1fr; }
+    .products-grid { grid-template-columns: repeat(2, 1fr); }
+    .platform-steps { grid-template-columns: repeat(3, 1fr); }
+    .innovation-grid { grid-template-columns: 1fr; }
+    .contact-cta { grid-template-columns: 1fr; }
+    .investors-grid { grid-template-columns: 1fr; }
+    .footer-inner { grid-template-columns: 1fr 1fr; gap: 40px; }
+    .esg-grid { grid-template-columns: repeat(2,1fr); }
+    .hero-content { padding: 0 32px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- MOCKUP BADGE -->
+<div class="mockup-badge">Design Mockup v1.0</div>
+
+<!-- ═══════════════════════════════════════════
+     NAVIGATION
+     ═══════════════════════════════════════════ -->
+<nav id="mainNav">
+  <div class="nav-logo">
+    <div class="logo-placeholder">[ LOGO ]</div>
+  </div>
+
+  <ul class="nav-links">
+    <li><a href="#platform">Platform</a></li>
+    <li><a href="#products">Products</a></li>
+    <li><a href="#innovation">Innovation Center</a></li>
+    <li><a href="#sustainability">Sustainability</a></li>
+    <li><a href="#investors">Investors</a></li>
+    <li>
+      <div class="lang-toggle">
+        <span class="active">EN</span>
+        <span>TR</span>
+      </div>
+    </li>
+    <li><a href="#contact" class="nav-cta">Contact Us</a></li>
+  </ul>
+</nav>
+
+<!-- ═══════════════════════════════════════════
+     HERO
+     ═══════════════════════════════════════════ -->
+<section class="hero" id="home">
+  <div class="section-label">HERO — ca-1.png</div>
+  <div class="hero-bg" id="heroBg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-overlay-bottom"></div>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow">Circular Economy · Carbon Materials · Turkey</div>
+    <h1>Carbon. Graphite.<br><strong>The Materials That<br>Power Tomorrow.</strong></h1>
+    <p class="hero-sub">
+      A 100-hectare integrated industrial platform — transforming end-of-life tires into
+      premium carbon materials, clean energy, and verified environmental value.
+    </p>
+    <div class="hero-actions">
+      <a href="#platform" class="btn-primary">Explore the Platform</a>
+      <a href="#investors" class="btn-outline">Investor Overview →</a>
+    </div>
+  </div>
+
+  <div class="hero-scroll">
+    <div class="hero-scroll-line"></div>
+    Scroll to explore
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     STATS BAR
+     ═══════════════════════════════════════════ -->
+<div class="stats-bar">
+  <div class="stats-bar-inner">
+    <div class="stat-item">
+      <div class="stat-number">100 <span class="stat-unit">ha</span></div>
+      <div class="stat-label">Integrated Complex</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">2,000 <span class="stat-unit">t/day</span></div>
+      <div class="stat-label">Feedstock Capacity</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">215.6 <span class="stat-unit">MW</span></div>
+      <div class="stat-label">Net Power Output</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">211K <span class="stat-unit">t/yr</span></div>
+      <div class="stat-label">Carbon Black Output</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">92K <span class="stat-unit">t/yr</span></div>
+      <div class="stat-label">Carbon Credit Potential</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     WHAT WE DO
+     ═══════════════════════════════════════════ -->
+<section class="what-we-do section-pad">
+  <div class="section-label">WHAT WE DO</div>
+  <div class="what-we-do-inner">
+    <!-- Circular SVG diagram -->
+    <div class="circle-diagram">
+      <svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Outer ring -->
+        <circle cx="200" cy="200" r="170" stroke="rgba(200,169,110,0.15)" stroke-width="1"/>
+        <circle cx="200" cy="200" r="130" stroke="rgba(200,169,110,0.08)" stroke-width="1"/>
+        <!-- Arc segments -->
+        <path d="M200 30 A170 170 0 0 1 347 285" stroke="#C8A96E" stroke-width="2.5" stroke-linecap="round" opacity="0.8"/>
+        <path d="M347 285 A170 170 0 0 1 53 285" stroke="#4CAF7D" stroke-width="2.5" stroke-linecap="round" opacity="0.8"/>
+        <path d="M53 285 A170 170 0 0 1 200 30" stroke="#3B7DDD" stroke-width="2.5" stroke-linecap="round" opacity="0.8"/>
+        <!-- Center circle -->
+        <circle cx="200" cy="200" r="70" fill="rgba(200,169,110,0.06)" stroke="rgba(200,169,110,0.25)" stroke-width="1.5"/>
+        <text x="200" y="188" text-anchor="middle" fill="#C8A96E" font-size="11" font-weight="700" letter-spacing="1" font-family="Inter,sans-serif">CIRCULAR</text>
+        <text x="200" y="206" text-anchor="middle" fill="#C8A96E" font-size="11" font-weight="700" letter-spacing="1" font-family="Inter,sans-serif">ECONOMY</text>
+        <text x="200" y="222" text-anchor="middle" fill="rgba(200,169,110,0.6)" font-size="9" font-family="Inter,sans-serif">PLATFORM</text>
+        <!-- Labels -->
+        <text x="200" y="20" text-anchor="middle" fill="#F2F2F5" font-size="12" font-weight="600" font-family="Inter,sans-serif">TAKE</text>
+        <text x="200" y="34" text-anchor="middle" fill="#A0A0B0" font-size="9" font-family="Inter,sans-serif">End-of-Life Tires</text>
+        <text x="368" y="310" text-anchor="middle" fill="#F2F2F5" font-size="12" font-weight="600" font-family="Inter,sans-serif">TRANSFORM</text>
+        <text x="368" y="324" text-anchor="middle" fill="#A0A0B0" font-size="9" font-family="Inter,sans-serif">Pyrolysis · Upgrading</text>
+        <text x="30" y="310" text-anchor="middle" fill="#F2F2F5" font-size="12" font-weight="600" font-family="Inter,sans-serif">DELIVER</text>
+        <text x="30" y="324" text-anchor="middle" fill="#A0A0B0" font-size="9" font-family="Inter,sans-serif">Carbon · Power · Credits</text>
+        <!-- Arrows on arcs -->
+        <polygon points="347,275 340,290 355,287" fill="#4CAF7D" opacity="0.8"/>
+        <polygon points="63,288 51,278 51,295" fill="#3B7DDD" opacity="0.8"/>
+        <polygon points="192,31 200,18 208,31" fill="#C8A96E" opacity="0.8"/>
+      </svg>
+    </div>
+
+    <div>
+      <div class="section-eyebrow">The Platform</div>
+      <h2 class="section-title">From Waste to<br><strong>World-Class Materials</strong></h2>
+      <p class="section-desc">
+        CA Energy's integrated circular economy platform is one of Turkey's most advanced
+        industrial complexes — engineered to close the loop on end-of-life tires and
+        deliver premium-grade carbon materials at global scale.
+      </p>
+
+      <div class="pillars">
+        <div class="pillar">
+          <div class="pillar-icon">♻</div>
+          <div class="pillar-text">
+            <h4>660,000 t/yr Tires Diverted</h4>
+            <p>End-of-life tires that would otherwise burden landfills become the feedstock for high-value industrial materials.</p>
+          </div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon">⚗</div>
+          <div class="pillar-text">
+            <h4>Advanced Continuous Pyrolysis</h4>
+            <p>Proprietary 455°C continuous reactor technology converts rubber into rCB, syngas, and pyrolysis oil. 94.2% conversion efficiency. 97.8% plant uptime.</p>
+          </div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon">◆</div>
+          <div class="pillar-text">
+            <h4>rCB → Graphite → Graphene</h4>
+            <p>Vertical integration from recovered carbon black all the way to graphene — a complete advanced carbon materials value chain.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════════
+     PLATFORM
+     ═══════════════════════════════════════════ -->
+<section class="platform-section" id="platform">
+  <div class="section-label">PLATFORM — ca-10.png</div>
+  <div class="section-pad-sm" style="padding-bottom: 0;">
+    <div class="section-eyebrow">Integrated Complex</div>
+    <h2 class="section-title" style="max-width:600px;">11 Interconnected Systems.<br><strong>One Circular Loop.</strong></h2>
+  </div>
+
+  <img class="platform-visual"
+       src="CA ENERGY MAIN FOLDER/ca-10.png"
+       alt="CA Energy integrated campus aerial view with process flow"
+       loading="lazy">
+
+  <div class="platform-steps">
+    <div class="platform-step">
+      <span class="step-num">01</span>
+      <h4>Tire Receiving & Storage</h4>
+      <p>100 ha NFPA-compliant campus. 60,000 t storage buffer. 24/7 automated check-in.</p>
+    </div>
+    <div class="platform-step">
+      <span class="step-num">02</span>
+      <h4>Pre-Sorting & Shredding</h4>
+      <p>2,500 TPD inbound capacity. Metal removal. Bulk shredder lines.</p>
+    </div>
+    <div class="platform-step">
+      <span class="step-num">03</span>
+      <h4>Continuous Pyrolysis</h4>
+      <p>3 lines at 455°C. 97.8% plant uptime. 24/7 operation.</p>
+    </div>
+    <div class="platform-step">
+      <span class="step-num">04</span>
+      <h4>Carbon Upgrading</h4>
+      <p>3 upgrading lines. rCB refining to graphite and graphene. Automated filling & palletizing.</p>
+    </div>
+    <div class="platform-step">
+      <span class="step-num">05</span>
+      <h4>Power Generation</h4>
+      <p>215.6 MW from syngas. 4 × 54 MW generators. Grid-connected.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     PYROLYSIS HIGHLIGHT
+     ═══════════════════════════════════════════ -->
+<section class="pyrolysis-section">
+  <div class="section-label">PYROLYSIS — 3-CAPR/0.png</div>
+  <div class="pyrolysis-bg"></div>
+  <div class="pyrolysis-overlay"></div>
+  <div class="pyrolysis-content">
+    <div class="section-eyebrow">Core Technology</div>
+    <h2><strong>Continuous Pyrolysis</strong><br>at Industrial Scale</h2>
+    <p>
+      Our proprietary continuous pyrolysis reactor system operates at 455°C
+      with a 94.2% conversion efficiency — engineered for reliability, safety,
+      and maximum material recovery from every ton of feedstock.
+    </p>
+    <div class="specs-mini">
+      <div class="spec-mini-item">
+        <span class="spec-mini-val">455°C</span>
+        <span class="spec-mini-label">Reactor Temperature</span>
+      </div>
+      <div class="spec-mini-item">
+        <span class="spec-mini-val">94.2%</span>
+        <span class="spec-mini-label">Conversion Efficiency</span>
+      </div>
+      <div class="spec-mini-item">
+        <span class="spec-mini-val">3</span>
+        <span class="spec-mini-label">Upgrading Lines</span>
+      </div>
+    </div>
+    <div style="margin-top: 36px;">
+      <a href="#" class="btn-outline">Full Technology Overview →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     PRODUCTS
+     ═══════════════════════════════════════════ -->
+<section class="products-section section-pad" id="products">
+  <div class="section-label">PRODUCTS</div>
+
+  <div class="products-header">
+    <div>
+      <div class="section-eyebrow">Product Portfolio</div>
+      <h2 class="section-title">From rCB to<br><strong>Graphene</strong></h2>
+    </div>
+    <div style="text-align:right;">
+      <p class="section-desc" style="max-width:340px; font-size:15px;">
+        Seven advanced carbon material lines. Global supply chain. Certified quality at every grade.
+      </p>
+      <a href="#" class="btn-outline" style="margin-top:20px; display:inline-block;">View Full Portfolio →</a>
+    </div>
+  </div>
+
+  <!-- Product card grid — clean photographic cards -->
+  <div class="products-grid">
+
+    <!-- rCB: tire shredding operations — dramatic, wide, no tiny details -->
+    <div class="product-card">
+      <img src="CA ENERGY MAIN FOLDER/ca-3.png" alt="Recovered Carbon Black" class="product-card-img">
+      <div class="product-card-overlay"></div>
+      <div class="product-card-content">
+        <span class="product-tag">rCB · Premium Grade</span>
+        <h3>Recovered Carbon Black</h3>
+        <p>N660 · N550 · N330 — certified grades for tire & rubber compounding. 211,200 t/yr capacity.</p>
+      </div>
+      <div class="product-card-arrow">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H4M10 2V8" stroke="#C8A96E" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </div>
+    </div>
+
+    <!-- Active Carbon: environmental systems aerial, daylight, green tones -->
+    <div class="product-card">
+      <img src="CA ENERGY MAIN FOLDER/ca-8.png" alt="Active Carbon" class="product-card-img">
+      <div class="product-card-overlay"></div>
+      <div class="product-card-content">
+        <span class="product-tag">Activated Carbon</span>
+        <h3>Active Carbon</h3>
+        <p>High surface area. Filtration, water treatment, pharmaceutical & energy storage applications.</p>
+      </div>
+      <div class="product-card-arrow">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H4M10 2V8" stroke="#C8A96E" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </div>
+    </div>
+
+    <!-- Graphite: steel wire recovery, golden hour, very clean composition -->
+    <div class="product-card">
+      <img src="CA ENERGY MAIN FOLDER/ca-6.png" alt="Graphite" class="product-card-img">
+      <div class="product-card-overlay"></div>
+      <div class="product-card-content">
+        <span class="product-tag">Advanced Materials</span>
+        <h3>Graphite</h3>
+        <p>Standard & premium grades. Batteries, lubricants, metallurgy & high-performance composites.</p>
+      </div>
+      <div class="product-card-arrow">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H4M10 2V8" stroke="#C8A96E" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </div>
+    </div>
+
+    <!-- Graphene: pyrolysis reactors, dark moody blue-green tones -->
+    <div class="product-card">
+      <img src="CA ENERGY MAIN FOLDER/ca-4.png" alt="Graphene" class="product-card-img">
+      <div class="product-card-overlay"></div>
+      <div class="product-card-content">
+        <span class="product-tag">Next Generation</span>
+        <h3>Graphene</h3>
+        <p>Single-layer graphene. Electronics, aerospace, energy & composite reinforcement.</p>
+      </div>
+      <div class="product-card-arrow">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H4M10 2V8" stroke="#C8A96E" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Product showcase full width -->
+  <div style="margin-top: 2px; position: relative;">
+    <img src="CA ENERGY MAIN FOLDER/ca-5.png"
+         alt="Quality Control Laboratory and Carbon Materials Warehouse"
+         class="product-showcase">
+    <div class="section-label">PRODUCTS — ca-5.png (QC Lab + Warehouse)</div>
+    <div class="product-showcase-caption">
+      <div>
+        <p style="font-size:12px; color:var(--mist); letter-spacing:0.1em; text-transform:uppercase; margin-bottom:6px;">Quality Assurance</p>
+        <h4 style="font-size:18px; font-weight:500;">ISO-Certified Quality Control Laboratory — Integrated Packaging & Warehousing</h4>
+      </div>
+      <a href="#" class="btn-outline">Explore Products →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     INNOVATION CENTER
+     ═══════════════════════════════════════════ -->
+<section class="innovation-section" id="innovation">
+
+  <div class="innovation-grid">
+    <div class="innovation-image-wrap" style="min-height: 560px;">
+      <div class="section-label">IC EXTERIOR — 7A-E1.png</div>
+      <img src="CA INNOVATON CENTER DESIGN IMAGES/CA INNOVATION CENTER-7/7A-E1.png"
+           alt="Innovation Center Main Entry Facade"
+           style="width:100%; height:100%; object-fit:cover;">
+    </div>
+    <div class="innovation-content">
+      <div class="section-eyebrow">Innovation Center</div>
+      <h2 class="section-title" style="margin-bottom:16px;">Where Carbon<br>Science Meets<br><strong>the Future</strong></h2>
+      <p class="section-desc">
+        A 12,000 m² research, demonstration and collaboration campus —
+        purpose-built to take carbon materials from laboratory concept
+        to commercial reality at pilot scale.
+      </p>
+      <div class="innovation-stats">
+        <div class="inno-stat">
+          <span class="inno-stat-num">12,000 m²</span>
+          <span class="inno-stat-label">Total GFA</span>
+        </div>
+        <div class="inno-stat">
+          <span class="inno-stat-num">2,700 m²</span>
+          <span class="inno-stat-label">Pilot & Demo Hall</span>
+        </div>
+        <div class="inno-stat">
+          <span class="inno-stat-num">18 m</span>
+          <span class="inno-stat-label">Clear Height</span>
+        </div>
+        <div class="inno-stat">
+          <span class="inno-stat-num">10+</span>
+          <span class="inno-stat-label">Product Streams</span>
+        </div>
+      </div>
+      <div style="margin-top: 32px;">
+        <a href="#" class="btn-primary">Explore the Center →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Interior Lobby -->
+  <div style="height: 10px; background: var(--black); border-top: 1px solid rgba(200,169,110,0.15);"></div>
+  <div class="innovation-grid" style="direction: rtl;">
+    <div class="innovation-image-wrap" style="min-height: 480px;">
+      <div class="section-label">IC LOBBY INTERIOR — 7A-I1.png</div>
+      <img src="CA INNOVATON CENTER DESIGN IMAGES/CA INNOVATION CENTER-7/7A-I1.png"
+           alt="Innovation Center Lobby Interior"
+           style="width:100%; height:100%; object-fit:cover; direction:ltr;">
+    </div>
+    <div class="innovation-content" style="direction: ltr;">
+      <div class="section-eyebrow">Collaboration Hub</div>
+      <h2 class="section-title" style="margin-bottom:16px;">Open.<br>Transparent.<br><strong>Collaborative.</strong></h2>
+      <p class="section-desc">
+        A two-story glazed atrium lobby creates a welcoming environment for
+        scientists, engineers, and partners. Wood, concrete, and glass —
+        materials that embody the balance of nature and technology.
+      </p>
+      <div class="pillars" style="margin-top: 32px;">
+        <div class="pillar">
+          <div class="pillar-icon" style="font-size:14px;">🔬</div>
+          <div class="pillar-text">
+            <h4>Pyrolysis Oil & Syngas Labs</h4>
+            <p>Dedicated analytical and R&D spaces for each product stream</p>
+          </div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon" style="font-size:14px;">🤝</div>
+          <div class="pillar-text">
+            <h4>Partnership Programs</h4>
+            <p>Academic, corporate and government collaboration frameworks</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pilot Hall -->
+  <div style="height: 10px; background: var(--black); border-top: 1px solid rgba(200,169,110,0.15);"></div>
+  <div class="pilot-hall">
+    <div class="section-label">PILOT HALL — pd hall-1.png</div>
+    <img src="CA INNOVATON CENTER DESIGN IMAGES/CA INNOVATION CENTER-7/pd hall-1.png"
+         alt="Pilot and Demonstration Hall">
+    <div class="pilot-hall-caption">
+      <div>
+        <p style="font-size:11px; letter-spacing:0.15em; color:var(--gold); text-transform:uppercase; margin-bottom:8px;">Pilot & Demonstration Hall</p>
+        <h3>2,700 m² · 18 m Clear Height ·<br><strong>Real Feedstock. Real Scale. Real Results.</strong></h3>
+      </div>
+      <a href="#" class="btn-outline">Learn More →</a>
+    </div>
+  </div>
+
+</section>
+
+<!-- ═══════════════════════════════════════════
+     SUSTAINABILITY
+     ═══════════════════════════════════════════ -->
+<section class="sustainability" id="sustainability">
+  <div class="section-label">SUSTAINABILITY</div>
+  <div class="section-eyebrow" style="justify-content: center; margin-bottom: 16px;">Environmental Impact</div>
+  <h2>
+    <span class="green">−1.1 Mt CO₂e</span> avoided annually.<br>
+    <span class="gold">660,000 t</span> of tires saved from landfill.
+  </h2>
+  <p class="sustainability-sub">
+    By design, not as an afterthought. CA Energy's circular model delivers measurable,
+    verifiable environmental value — independently monitored and certified.
+  </p>
+
+  <div class="esg-grid">
+    <div class="esg-card">
+      <div class="esg-icon">🌿</div>
+      <div class="esg-val">−1.1 Mt</div>
+      <div class="esg-label">CO₂e Avoided / Year</div>
+    </div>
+    <div class="esg-card">
+      <div class="esg-icon">♻</div>
+      <div class="esg-val">660K t</div>
+      <div class="esg-label">Tires Diverted / Year</div>
+    </div>
+    <div class="esg-card">
+      <div class="esg-icon">💧</div>
+      <div class="esg-val">Zero</div>
+      <div class="esg-label">Water Discharge</div>
+    </div>
+    <div class="esg-card">
+      <div class="esg-icon">⚡</div>
+      <div class="esg-val">1,707 GWh</div>
+      <div class="esg-label">Clean Electricity / Year</div>
+    </div>
+  </div>
+
+  <a href="#" class="btn-outline">Full Sustainability Report →</a>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     CARBON CREDITS
+     ═══════════════════════════════════════════ -->
+<section class="carbon-credits">
+  <div class="section-label">CARBON CREDITS — 10-CACC/1.png</div>
+  <div class="carbon-credits-bg"></div>
+  <div class="carbon-credits-overlay"></div>
+  <div class="carbon-credits-content">
+    <div class="section-eyebrow">Verified Impact</div>
+    <h2>Carbon Credit<br>Generation &<br><strong>MRV Architecture</strong></h2>
+    <p>
+      Our integrated MRV (Measurement, Reporting and Verification) framework
+      quantifies circular value through verified climate impact — enabling
+      high-integrity carbon credit issuance traceable at every step.
+    </p>
+    <div class="credit-badges">
+      <span class="credit-badge">MRV Verified</span>
+      <span class="credit-badge">92,400 t/yr Potential</span>
+      <span class="credit-badge">E:97 · S:92 · G:94</span>
+    </div>
+    <a href="#" class="btn-outline" style="border-color: rgba(76,175,125,0.5); color: var(--green);">
+      Carbon Credit Overview →
+    </a>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     INVESTORS
+     ═══════════════════════════════════════════ -->
+<section class="investors-section" id="investors">
+  <div class="section-label">INVESTORS</div>
+  <div class="section-eyebrow">Investment Platform</div>
+  <h2 class="section-title" style="max-width: 580px;">Multiple Revenue Streams.<br><strong>One Integrated Platform.</strong></h2>
+  <p class="section-desc" style="margin-top: 16px;">
+    CA Energy generates diversified revenue across carbon materials, energy, steel,
+    and verified carbon credits — combining industrial scale with ESG-aligned returns.
+  </p>
+
+  <div class="investors-grid">
+    <div class="revenue-streams">
+      <p style="font-size:11px; font-weight:700; letter-spacing:0.12em; color:var(--gold); text-transform:uppercase; margin-bottom:20px;">Balanced · Resilient · Scalable</p>
+      <div class="revenue-item">
+        <span class="revenue-label">rCB Sales</span>
+        <span class="revenue-pct">34%</span>
+      </div>
+      <div class="revenue-item" style="border-left-color: var(--green);">
+        <span class="revenue-label">Electricity Sales</span>
+        <span class="revenue-pct" style="color: var(--green);">20%</span>
+      </div>
+      <div class="revenue-item" style="border-left-color: #aaa;">
+        <span class="revenue-label">Steel Sales</span>
+        <span class="revenue-pct" style="color: #aaa;">17%</span>
+      </div>
+      <div class="revenue-item" style="border-left-color: var(--blue);">
+        <span class="revenue-label">Pyrolysis Oil Sales</span>
+        <span class="revenue-pct" style="color: var(--blue);">12%</span>
+      </div>
+      <div class="revenue-item" style="border-left-color: var(--green);">
+        <span class="revenue-label">Carbon Credits</span>
+        <span class="revenue-pct" style="color: var(--green);">9%</span>
+      </div>
+      <div class="revenue-item" style="border-left-color: #666;">
+        <span class="revenue-label">By-Products</span>
+        <span class="revenue-pct" style="color: #666;">8%</span>
+      </div>
+    </div>
+
+    <div class="investor-cta-box">
+      <h3>Request the<br><strong>Investor Overview</strong></h3>
+      <p>
+        Access our detailed platform summary — financials, technology overview,
+        ESG metrics, and market positioning. Response within 24 hours.
+      </p>
+      <div class="form-row">
+        <div class="form-grid">
+          <input class="form-field" type="text" placeholder="First Name">
+          <input class="form-field" type="text" placeholder="Last Name">
+        </div>
+        <input class="form-field" type="email" placeholder="Business Email">
+        <input class="form-field" type="text" placeholder="Company / Organization">
+        <select class="form-field" style="cursor:pointer;">
+          <option value="" disabled selected>I am a...</option>
+          <option>Institutional Investor</option>
+          <option>Family Office</option>
+          <option>Strategic Partner</option>
+          <option>Analyst / Advisor</option>
+        </select>
+        <button class="btn-primary" style="border:none; cursor:pointer; font-size:14px; padding:14px;">
+          Request Overview →
+        </button>
+      </div>
+      <p style="font-size: 11px; color: rgba(160,160,176,0.6); text-align:center;">
+        Your information is treated as strictly confidential.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     CONTACT CTA
+     ═══════════════════════════════════════════ -->
+<section class="contact-cta" id="contact">
+  <div class="section-label">CONTACT</div>
+  <div>
+    <div class="section-eyebrow">Get in Touch</div>
+    <h2>Ready to source premium<br>carbon materials or<br><strong>explore investment?</strong></h2>
+    <p>
+      Whether you are a material buyer, a potential investor, or a research partner —
+      we welcome your inquiry and respond within one business day.
+    </p>
+    <div class="contact-channels">
+      <div class="channel">
+        <div class="channel-icon">✉</div>
+        <span>info@carbongraf.com</span>
+      </div>
+      <div class="channel">
+        <div class="channel-icon">📍</div>
+        <span>Organized Industrial Zone, Türkiye</span>
+      </div>
+      <div class="channel">
+        <div class="channel-icon">🕐</div>
+        <span>Response within 24 business hours</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="contact-form">
+    <div class="form-grid">
+      <input class="form-field" type="text" placeholder="Name">
+      <input class="form-field" type="email" placeholder="Email">
+    </div>
+    <input class="form-field" type="text" placeholder="Company">
+    <select class="form-field" style="cursor:pointer;">
+      <option value="" disabled selected>Inquiry type</option>
+      <option>Product & Supply</option>
+      <option>Investment</option>
+      <option>Innovation Center Partnership</option>
+      <option>General Inquiry</option>
+    </select>
+    <textarea class="form-field" placeholder="Your message..."></textarea>
+    <button class="btn-primary" style="border:none; cursor:pointer; font-size:14px; padding:14px;">
+      Send Message →
+    </button>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     FOOTER
+     ═══════════════════════════════════════════ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="logo-placeholder">[ LOGO ]</div>
+      <p>
+        A world-scale integrated circular economy platform — transforming end-of-life tires
+        into premium carbon materials, clean energy, and verified environmental value. Türkiye.
+      </p>
+      <div style="display:flex; gap:12px; margin-top:20px;">
+        <a href="#" style="color:var(--mist); font-size:12px; text-decoration:none;">LinkedIn</a>
+        <span style="color:rgba(255,255,255,0.15);">·</span>
+        <a href="#" style="color:var(--mist); font-size:12px; text-decoration:none;">capowergreen.com</a>
+      </div>
+    </div>
+
+    <div class="footer-col">
+      <h5>Platform</h5>
+      <ul>
+        <li><a href="#">Overview</a></li>
+        <li><a href="#">Tire Receiving</a></li>
+        <li><a href="#">Pyrolysis Technology</a></li>
+        <li><a href="#">Carbon Upgrading</a></li>
+        <li><a href="#">Power Generation</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h5>Products</h5>
+      <ul>
+        <li><a href="#">Recovered Carbon Black</a></li>
+        <li><a href="#">Active Carbon</a></li>
+        <li><a href="#">Graphite</a></li>
+        <li><a href="#">Graphene</a></li>
+        <li><a href="#">Steel Wire</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h5>Company</h5>
+      <ul>
+        <li><a href="#">About CA Energy</a></li>
+        <li><a href="#">Innovation Center</a></li>
+        <li><a href="#">Sustainability</a></li>
+        <li><a href="#">Investors</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <span>© 2026 CA Energy · carbongraf.com · All rights reserved</span>
+    <div style="display:flex; gap:20px;">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Use</a>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══════════════════════════════════════════
+     JAVASCRIPT — Nav scroll + Parallax
+     ═══════════════════════════════════════════ -->
+<script>
+  // Nav scroll state
+  const nav = document.getElementById('mainNav');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 60) {
+      nav.classList.add('scrolled');
+    } else {
+      nav.classList.remove('scrolled');
+    }
+  });
+
+  // Subtle parallax on hero
+  const heroBg = document.getElementById('heroBg');
+  window.addEventListener('scroll', () => {
+    const scrollY = window.scrollY;
+    if (scrollY < window.innerHeight) {
+      heroBg.style.transform = `scale(1.05) translateY(${scrollY * 0.25}px)`;
+    }
+  });
+
+  // Анимации отключены для стабильной работы макета при согласовании
+  // (будут включены в финальной версии)
+
+  console.log('%c carbongraf.com — Design Mockup v1.0', 'color: #C8A96E; font-size: 16px; font-weight: bold;');
+  console.log('%c For client approval only. Not production code.', 'color: #A0A0B0; font-size: 12px;');
+</script>
+
+</body>
+</html>
